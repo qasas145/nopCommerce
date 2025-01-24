@@ -1649,6 +1649,9 @@ public partial class CustomerController : BasePublicController
             {
                 _notificationService.SuccessNotification(await _localizationService.GetResourceAsync("Account.ChangePassword.Success"));
 
+                await _customerActivityService.InsertActivityAsync(customer, "PublicStore.ChangingPassword", await 
+                    _localizationService.GetResourceAsync("ActivityLog.PublicStore.ChangingPassword"));
+
                 //authenticate customer after changing password
                 await _customerRegistrationService.SignInCustomerAsync(customer, null, true);
 
