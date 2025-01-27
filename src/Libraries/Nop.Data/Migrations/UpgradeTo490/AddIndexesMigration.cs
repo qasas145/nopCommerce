@@ -3,7 +3,7 @@ using Nop.Core.Domain.Topics;
 
 namespace Nop.Data.Migrations.UpgradeTo490;
 
-[NopSchemaMigration("2025-01-14 00:00:00", "AddIndexesMigration for 4.90.0")]
+[NopSchemaMigration("2025-01-28 00:00:00", "AddIndexesMigration for 4.90.0")]
 public class AddIndexesMigration : ForwardOnlyMigration
 {
     private readonly INopDataProvider _dataProvider;
@@ -23,7 +23,7 @@ public class AddIndexesMigration : ForwardOnlyMigration
         var topicTableName = nameof(Topic);
         var topicEndDateColumnName = nameof(Topic.AvailableEndDateTimeUtc);
         var topicStartDateColumnName = nameof(Topic.AvailableStartDateTimeUtc);
-        var topicAvailableDatesIndexName = _dataProvider.GetIndexName(topicTableName, $"{topicEndDateColumnName}_{topicStartDateColumnName}");
+        var topicAvailableDatesIndexName = "IX_Topic_Availability";
         if (!Schema.Table(topicAvailableDatesIndexName).Exists())
             Create.Index(topicAvailableDatesIndexName)
                 .OnTable(topicTableName)

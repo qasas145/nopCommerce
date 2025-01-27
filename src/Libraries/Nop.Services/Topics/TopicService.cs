@@ -203,6 +203,27 @@ public partial class TopicService : ITopicService
     }
 
     /// <summary>
+    /// Get a value indicating whether a topic is available (availability dates)
+    /// </summary>
+    /// <param name="topic">Topic</param>
+    /// <param name="dateTime">Datetime to check; pass null to use current date</param>
+    /// <returns>Result</returns>
+    public virtual bool TopicIsAvailable(Topic topic, DateTime? dateTime = null)
+    {
+        ArgumentNullException.ThrowIfNull(topic);
+
+        dateTime ??= DateTime.UtcNow;
+
+        if (topic.AvailableStartDateTimeUtc.HasValue && topic.AvailableStartDateTimeUtc.Value > dateTime)
+            return false;
+
+        if (topic.AvailableEndDateTimeUtc.HasValue && topic.AvailableEndDateTimeUtc.Value < dateTime)
+            return false;
+
+        return true;
+    }
+
+    /// <summary>
     /// Updates the topic
     /// </summary>
     /// <param name="topic">Topic</param>

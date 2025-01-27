@@ -51,8 +51,10 @@ public partial class TopicController : BasePublicController
 
         if (topic == null)
             return InvokeHttp404();
+
         var notAvailable = !topic.Published ||
-                           (DateTime.UtcNow >= (topic.AvailableStartDateTimeUtc ?? DateTime.MinValue) && DateTime.UtcNow <= (topic.AvailableEndDateTimeUtc ?? DateTime.MaxValue)) ||
+                           //availability dates
+                           !_topicService.TopicIsAvailable(topic) ||
                            //ACL (access control list)
                            !await _aclService.AuthorizeAsync(topic) ||
                            //store mapping
