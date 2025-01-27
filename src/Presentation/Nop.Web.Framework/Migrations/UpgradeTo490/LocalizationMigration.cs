@@ -59,7 +59,7 @@ public class LocalizationMigration : MigrationBase
             ["Admin.ConfigurationSteps.PaymentPayPal.ApiCredentials.Text"] = "If you already have an app created in your PayPal account, follow these steps.",
 
             //#6407
-            ["ActivityLog.PublicStore.ChangingPassword"] = "Public store. Customer has changed the password",
+            ["ActivityLog.PublicStore.PasswordChanged"] = "Public store. Customer has changed the password",
 
         }, languageId);
 

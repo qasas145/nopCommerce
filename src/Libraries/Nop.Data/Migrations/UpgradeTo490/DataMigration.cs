@@ -36,12 +36,12 @@ public class DataMigration : Migration
         var activityLogTypeTable = _dataProvider.GetTable<ActivityLogType>();
 
         //#6407
-        if (!activityLogTypeTable.Any(alt => string.Compare(alt.SystemKeyword, "PublicStore.ChangingPassword", StringComparison.InvariantCultureIgnoreCase) == 0))
+        if (!activityLogTypeTable.Any(alt => string.Compare(alt.SystemKeyword, "PublicStore.PasswordChanged", StringComparison.InvariantCultureIgnoreCase) == 0))
         {
             _dataProvider.InsertEntity(
                 new ActivityLogType
                 {
-                    SystemKeyword = "PublicStore.ChangingPassword",
+                    SystemKeyword = "PublicStore.PasswordChanged",
                     Enabled = true,
                     Name = "Public store. Change password"
                 }
